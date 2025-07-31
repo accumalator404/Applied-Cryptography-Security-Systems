@@ -1,66 +1,63 @@
-# Applied-Cryptography-Security-Systems
-This project implements and analyzes various cryptographic primitives and their security properties, showcasing practical cryptanalysis skills and secure implementation techniques. The work demonstrates understanding of both the mathematical foundations of cryptography and real-world attack methodologies.
+# AES Cryptanalysis Toolkit
 
+A collection of cryptographic tools for implementing and attacking AES encryption modes, plus hash function security testing.
 
-# Cryptographic Security Analysis
-
-A university coursework project implementing and analyzing cryptographic systems, including AES encryption modes, cryptanalytic attacks, and hash function security.
-
-## What I Built
-
-### Task 1: Custom AES Encryption Mode
-- Implemented a custom AES encryption/decryption system using cryptography.io
-- Built a cipher mode that combines AES-ECB with XOR-based block chaining
-- Handles hexadecimal keys, initialization vectors, and proper padding
+### Custom AES Implementation
+- Built a custom AES encryption mode that combines AES-ECB with XOR block chaining
+- Handles hex keys, initialization vectors, and padding properly
+- Uses the cryptography.io library for the core AES operations
 
 ```python
-# Example usage
+# Encrypt and decrypt with custom mode
 encrypted = Encrypt("2b7e151628aed2a6abf7158809cf4f3c", "000102030405060708090a0b0c0d0e0f", "Hello World")
 decrypted = Decrypt(key, iv, encrypted)
 ```
 
-### Task 2: Cryptanalytic Attack
-- Developed a practical attack against the custom AES mode
-- Exploits XOR chaining vulnerabilities to forge messages without knowing the key
-- Successfully demonstrated by forging military communications
+### Attack Implementation
+- Wrote a known-plaintext attack that exploits the XOR chaining weakness
+- Can forge new encrypted messages without knowing the encryption key
+- Demonstrated it by turning "hold position" orders into "attack" orders
 
 ```python
-# Attack demo: forge "attack orders" from "hold position" message
+# Forge messages using the attack
 forged_ciphertext = attackAESMode(original_message, known_ciphertext, target_message)
 ```
 
-### Task 3: Hash Function Analysis
-- Created a custom hash function based on SHA-256 with iterative compression
-- Built security analysis tools to detect vulnerabilities
-- Implemented birthday attack and other cryptanalytic tests
+### Hash Function Security Testing
+- Created a custom hash function based on SHA-256 with compression stages
+- Built tools to test its security using birthday attacks and other methods
+- Shows how truncated hashes can be vulnerable to collisions
 
 ```python
+# Test hash security
 hash_output = myHash(data)
-security_status = myAttack()  # Returns "YES" if secure, "NO" if vulnerable
+is_secure = myAttack()  # Returns "YES" or "NO"
 ```
 
-## Key Skills Demonstrated
+## Skills Shown
 
-- **Cryptographic Programming**: AES implementation, secure key handling
-- **Security Analysis**: Vulnerability assessment and attack development
-- **Professional Libraries**: Using industry-standard cryptography.io
-- **Problem Solving**: Breaking down complex security problems
+- Writing cryptographic code with proper key handling
+- Finding and exploiting vulnerabilities in crypto implementations  
+- Building security testing tools
+- Understanding the math behind cryptographic attacks
 
-## Technologies Used
+## Technologies
 
 - Python 3.8+
 - cryptography.io library
 - SHA-256 hashing
-- NumPy for mathematical operations
+- Custom algorithm implementations
 
-## Academic Context
-
-This was coursework for **SCC.363 Security and Risk** at Lancaster University, worth 30% of the module grade. The project demonstrates both defensive cryptographic implementation and offensive security analysis.
-
-## Running the Code
+## How to Run
 
 ```bash
 pip install cryptography
-python src/aes_implementation.py
-python src/hash_analysis.py
+python aes_implementation.py
+python hash_analysis.py
 ```
+
+## Why This Matters
+
+Understanding how to break crypto is just as important as knowing how to implement it. This toolkit shows both sides - building secure implementations and finding the flaws that make them insecure.
+
+The military communication example demonstrates how small implementation mistakes can have serious real-world consequences.
